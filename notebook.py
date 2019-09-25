@@ -1,11 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
+#     formats: ipynb,py:light
 #     text_representation:
 #       extension: .py
 #       format_name: light
 #       format_version: '1.4'
-#       jupytext_version: 1.1.1
+#       jupytext_version: 1.2.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -17,6 +18,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # %matplotlib inline
 import sys
+
+
 
 from torchvision.transforms import ToTensor
 
@@ -37,7 +40,7 @@ class MNISTDataset(Dataset):
     
     def __init__(self, transform=None):
         self.mnist = fetch_openml('mnist_784', version=1,)
-        self.data = self.mnist.data.reshape(-1, 28, 28).astype('uint8')
+        self.data = self.mnist.data.reshape(-1, 28, 28, 1).astype('uint8')
         self.label = self.mnist.target.astype(int)
         
         self.transform = transform
@@ -125,7 +128,13 @@ dataset = MNISTDataset(transform=ToTensor())
 
 fold = KFold(n_splits=3, shuffle=True, random_state=0)
 
-cv = 0.0
+
+
+
+
+
+
+
 
 for fold_idx, (train_idx, valid_idx) in enumerate(fold.split(dataset.data, dataset.label)):
     
@@ -147,4 +156,8 @@ for fold_idx, (train_idx, valid_idx) in enumerate(fold.split(dataset.data, datas
         
     cv += valid_acc / fold.n_splits
 
+cv = 0.0
+
 print('cv {}'.format(cv))
+
+
