@@ -130,7 +130,7 @@ cv = 0.0
 for fold_idx, (train_idx, valid_idx) in enumerate(fold.split(dataset.data, dataset.label)):
     
     print('fold {}'.format(fold_idx))
-    net = resnet50()
+    net = resnet50(num_classes=10)
     net.conv1  = nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False) 
     net = net.to(device)
     optimizer = optim.SGD(net.parameters(), lr=learning_rate, weight_decay=1e-4)
