@@ -128,13 +128,7 @@ dataset = MNISTDataset(transform=ToTensor())
 
 fold = KFold(n_splits=3, shuffle=True, random_state=0)
 
-
-
-
-
-
-
-
+cv = 0.0
 
 for fold_idx, (train_idx, valid_idx) in enumerate(fold.split(dataset.data, dataset.label)):
     
@@ -156,7 +150,7 @@ for fold_idx, (train_idx, valid_idx) in enumerate(fold.split(dataset.data, datas
         
     cv += valid_acc / fold.n_splits
 
-cv = 0.0
+
 
 print('cv {}'.format(cv))
 
